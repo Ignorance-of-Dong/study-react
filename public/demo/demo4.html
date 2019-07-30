@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <p id="error" style="color: red;">字数不能超过十个</p>
+    <button type="button" id="clearError">X</button>
+</body>
+<script>
+    var input = document.getElementById('input');
+    var errorMsg = document.getElementById('error');
+    document.getElementById('clearError').addEventListener('click',function(){
+        setState({
+            error : false
+        })
+    })
+
+    var state = {
+        value : '',
+        error : false
+    }
+
+    var setState = function(newState) {
+        state = {
+            ...state,
+            ...newState
+        };
+        render();
+    }
+
+    // 只是渲染页面的方法
+    var render = function() {
+        input.value = state.value;
+        if(state.error) {
+            errorMsg.style.display = 'block'
+        } else {
+            errorMsg.style.display = 'none'
+        }
+    }
+
+    var handleInput = function(value) {
+        if(value.length <= 10) {
+            setState({
+                value : value
+            })
+        } else {
+            setState({
+                error : true
+            })
+        }
+    }
+
+    input.addEventListener('input',function(){
+        handleInput(this.value);
+    })
+
+    render();
+</script>
+</html>

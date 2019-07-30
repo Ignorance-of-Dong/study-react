@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 对模式进行一种组建式的包装 -->
+    <div id="root"></div>
+    <script>
+        var root = document.getElementById('root');
+
+        // Component提供继承
+        class Component {
+            setState(newState) {
+                this.state = {
+                    ...this.state,
+                    ...newState
+                }
+            }
+        }
+
+        class Button extends Component{
+            constructor() {
+                super();
+                this.state = {
+                    like : true
+                }
+            }
+    
+            render() {
+                    const state = this.state;
+                return `
+                    <button type="button" style="color: ${state.like ? 'red' : 'black'}" onclick="handleClick()">
+                        ${state.like ? "已赞" : "喜欢"}
+                    </button> `
+            }
+        }
+
+        class Title extends Component{
+            constructor() {
+                super();
+                this.state = {
+                    title : "这是一个标题"
+                }
+            }
+
+            render() {
+                return `<h1>${this.state.title}</h1>`
+            }
+        }
+
+        class Warp {
+            constructor() {
+
+            }
+            render() {
+                return `
+                    warp 
+                    ${new Title().render()}
+                    ${new Title().render()}
+                    ${new Title().render()}
+                    ${new Title().render()}
+                    ${new Title().render()}
+                    ${new Button().render()}
+                `
+            }
+        }
+
+        root.innerHTML = new Warp().render();
+    </script>
+</body>
+</html>
