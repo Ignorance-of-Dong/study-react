@@ -4,7 +4,7 @@
 
 - git commit -m ''  // 对暂存区的文件添加描述
 
-- git pull // 拉取远程代码
+- git pull // 拉取远程仓库代码
 
 - git push // 向远程仓库上传本地代码
 
@@ -64,3 +64,11 @@
 ## 注意事项
 
 - 如果组件内部显示声明了constructor必须在其内部加上super(), 根据es6 class类函数规范， constuctor 是在继承其他类的时候定义的，super函数是用来继承被继承类的this指向
+
+- react的概述 -- 包含react生命周期概述 --【请访问  （http://my.ignorantscholar.cn/2019/04/03/react-task/）】
+
+- react组件优化及组件通讯 【请访问 （http://my.ignorantscholar.cn/2019/04/03/react-optimization/）】
+
+- 浅谈React的最大亮点——虚拟DOM 【请访问 （http://my.ignorantscholar.cn/2019/04/03/virtualDom1%20/）】
+
+- react中的setState的使用和深入理解 【请访问 （http://my.ignorantscholar.cn/2019/04/03/setState/#more）】
