@@ -6,6 +6,8 @@ import Button, {Nav} from './Button';
 
 import Input from './Input';
 
+import Btn from './components/LikeButton/index'
+
 // 自定义组件 (类的方式)
 // class Nav extends Component {
 //   constructor() {
@@ -53,7 +55,7 @@ class App extends Component  {
     // console.log('你在调用handleClick事件')
   // }
   render() {
-    // console.log('render 函数触发了')
+    console.log('APP组件更新了')
     return (
       <div>
          {/* <Nav />
@@ -66,7 +68,17 @@ class App extends Component  {
         </button> */}
         {/* <p onClick={()=>this.hanleClick()}>点击看this</p> */}
 
-        <Input></Input>
+        {/* <Input></Input> */}
+        {/* <Button></Button>
+        <Btn></Btn>
+        <p onClick={()=>this.setState({})}>点击更新App组件</p> */}
+        <hr />
+        <Nav title="校园">
+            <p>这是一个笑话</p>
+            <h2>这是一个小丑</h2>
+            <Button name="点击一下你就爽了"></Button>
+            <Button name="干就完了"></Button>
+        </Nav>
       </div>
     )
   }

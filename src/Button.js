@@ -5,15 +5,22 @@ class Button extends Component {
         super();
     }
     render() {
+        console.log('Button组件更新了')
         return (
-            <button>这是来自Button.js的Button组件</button>
+            <button>
+                {this.props.name}
+            </button>
         )
     }
 }
 
-const Nav = function() {
+// 函数的 组件
+const Nav = function(props) {
     return (
-        <div>Nav</div>
+        <div style={{color : 'white', background : 'black'}}>
+            {props.title}
+            {props.children}
+        </div>
     )
 }
 export default Button;
