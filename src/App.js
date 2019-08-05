@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Test from './Test';
 import Demo from './Demo';
+import PropTypes from 'prop-types'; 
 
 // 状态提升和方法下方的例子
 
@@ -58,6 +59,24 @@ import Demo from './Demo';
 //   }
 // }
 
+// react组件类属性
+class Title extends Component {
+  static propTypes = {
+    title : PropTypes.string
+  }
+  static defaultProps = {
+    title : "这是一个默认的标题"
+  }
+  render() {
+    return (
+      <div>{this.props.title}</div>
+    )
+  }
+}
+
+// Title.defaultProps = {
+//   title : "123"
+// }
 
 // 生命周期的例子
 
@@ -71,10 +90,11 @@ class App extends Component {
   render() {
     return (
       <div>
-          {this.state.isRenderTest ? <Demo></Demo> : "不渲染Demo"}
+          <Title></Title>
+          {/* {this.state.isRenderTest ? <Demo></Demo> : "不渲染Demo"}
           <p>App</p>
           <button type="button" onClick={()=>this.setState({})}>App setState更新</button>
-          <button type="button" onClick={()=>this.setState({isRenderTest : !this.state.isRenderTest})}>切换Demo渲染</button>
+          <button type="button" onClick={()=>this.setState({isRenderTest : !this.state.isRenderTest})}>切换Demo渲染</button> */}
       </div>
     )
   }
