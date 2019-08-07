@@ -10,7 +10,9 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <TodoHeader />
+                <TodoHeader desc="今日事，今日毕">
+                    代办事项列表
+                </TodoHeader>
                 <TodoInput />
                 <TodoList />
             </div>
