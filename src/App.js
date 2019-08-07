@@ -7,11 +7,18 @@ import {
 } from './components'
 
 export default class App extends Component {
+    constructor () {
+        super()
+        this.state = {
+            title : '代办事项列表',
+            desc : '今日事，今日毕'
+        }
+    }
     render() {
         return (
             <div>
-                <TodoHeader desc="今日事，今日毕">
-                    代办事项列表
+                <TodoHeader desc={this.state.desc}>
+                    {this.state.title}
                 </TodoHeader>
                 <TodoInput />
                 <TodoList />
