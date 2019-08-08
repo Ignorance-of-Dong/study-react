@@ -43,6 +43,32 @@ export default class App extends Component {
                 })
             })
     }
+
+    onCompletedChange = (id) => {
+        console.log('onCompletedChange', id)
+        this.setState((prevState) => {
+            return {
+                todos : prevState.todos.map(todo => {
+                    if(todo.id === id) {
+                        todo.isCompleted = !todo.isCompleted
+                    }
+                    return todo
+                })
+            }
+        })
+    }
+
+    handleDelete = (id) => {
+        console.log('fanqiang', id)
+        this.setState ((prevState) => {
+           return {
+               todos : prevState.todos.filter(todo => {
+                   return todo.id != id
+               })
+           }
+        })
+    }
+
     render() {
         return (
             <div>
@@ -50,7 +76,11 @@ export default class App extends Component {
                     {this.state.title}
                 </TodoHeader>
                 <TodoInput addTodo={this.addTodo}/>
-                <TodoList todos={this.state.todos}/>
+                <TodoList
+                 todos={this.state.todos}
+                 onCompletedChange={this.onCompletedChange}
+                 handleDelete={this.handleDelete}
+                />
                 <Like />
             </div>
         )
