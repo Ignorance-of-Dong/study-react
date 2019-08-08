@@ -9,11 +9,25 @@ export default class TodoInput extends Component {
     static defaultProps = {
         btnText : '添加TODO'
     }
+    constructor () {
+        super()
+        this.state = {
+            inputValue : ''
+        }
+    }
+    handleInputChange = (e) => {
+        this.setState ({
+            inputValue : e.target.value
+        })
+    }
+    handleAddClick = () => {
+        this.props.addTodo(this.state.inputValue)
+    }
     render() {
         return (
             <div>
-                <input type="text"/>  
-                <button>{this.props.btnText}</button>
+                <input type="text" value={this.state.inputValue} onChange={this.handleInputChange}/>  
+                <button onClick={this.handleAddClick}>{this.props.btnText}</button>
             </div>
         )
     }

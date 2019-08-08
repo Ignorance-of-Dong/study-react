@@ -24,13 +24,32 @@ export default class App extends Component {
             }]
         }
     }
+    addTodo = (todoTitle) => {
+        console.log(todoTitle)
+        // 这样写出事了，3 不是数组，因为push 语句返回的是数组的长度
+        // this.setState({
+        //     todos : this.state.todos.push({
+        //        id : Math.random(), 
+        //        title : todoTitle,
+        //        isCompleted : false
+        //     })
+        // })
+
+        this.setState({
+                todos : this.state.todos.concat({
+                   id : Math.random(), 
+                   title : todoTitle,
+                   isCompleted : false
+                })
+            })
+    }
     render() {
         return (
             <div>
                 <TodoHeader desc={this.state.desc}>
                     {this.state.title}
                 </TodoHeader>
-                <TodoInput />
+                <TodoInput addTodo={this.addTodo}/>
                 <TodoList todos={this.state.todos}/>
                 <Like />
             </div>
