@@ -20,23 +20,23 @@ export default class TodoItem extends Component {
     }
 
     shouldComponentUpdate (nextProps, nextState) {
-        return nextProps.isCompleted !== this.props.isCompleted
+        return nextProps.completed !== this.props.completed
     }
 
     render() {
         console.log('TodoItem render')
         const {
-            isCompleted,
+            completed,
             title
         } = this.props
         // console.log(this.props)
         return (
             <li>
                <input type="checkbox" 
-                checked={isCompleted}
+                checked={completed}
                 onChange={this.handleCheckboxChange}
                />
-               <span onClick={this.handleDeleteItem}>{title} {isCompleted ? '已完成' : '未完成'}</span>
+               <span onClick={this.handleDeleteItem}>{title} {completed ? '已完成' : '未完成'}</span>
             </li>
         )
     }
