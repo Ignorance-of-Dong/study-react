@@ -1,31 +1,88 @@
-import React, { useState, useEffect } from 'react'
+import React, {Component, createContext} from 'react'
 import { render } from 'react-dom'
 
-const Counter = () => {
-    // useState 是一个方法，这个方法的参数就是默认值。结果是一个数组，数组的第一个元素就是 state，第二个元素相当于 setState
-    // 解构出来数组中的两个值
-    const [count, setCount] = useState(0)
-    // useEffect的参数是一个回调，不管是组件挂载还是更新，都会触发这个回调方法，类似于componentDidMount和
-    // componentDidUpdate的结合
-    useEffect(() => {
-        console.log('渲染了')
-        console.log(document.title)
-        document.title = `当前的数量为 ${count}`
-    })
-    return (
-        <div>
-            <p>当前的数量为 {count}</p>
-            {/* 这里的setCount就是useState所生成的方法 (第二个). 注意：和setState不一样的地方在于参数，
-            这里的参数就是一个新值即可 */}
-            <button onClick={() => {setCount(count - 1)}}>-</button>
-            {/* 这里就是useState创建的值 (第一个) */}
-            <span>{count}</span>
-            <button onClick={() => {setCount(count + 1)}}>+</button>
-        </div>
-    )
+const {
+    Provider,
+    Consumer : CounterConsumer
+} = createContext()
+
+class CounterProvider extends Component {
+    constructor () {
+        super()
+        this.state = {
+            count : 100
+        }
+    }
+    incrementCount = () => {
+        this.setState ({
+            count : this.state.count + 1
+        })
+    }
+    decrementCount = () => {
+        this.setState ({
+            count : this.state.count - 1
+        })
+    }
+    render () {
+        return (
+            <Provider value={{
+                count : this.state.count,
+                onIncrementCount : this.incrementCount,
+                onDecrementCount : this.decrementCount
+            }}>
+                {this.props.children}
+            </Provider>
+        )
+    }
 }
 
+class Counter extends Component {
+    render () {
+        return (
+            <CounterConsumer>
+                {
+                    ({ count }) => {
+                        return <span>{ count }</span>
+                    }
+                }
+            </CounterConsumer>
+            
+        )
+    }
+}
+
+class CountBtn extends Component {
+    render () {
+        return (
+            <CounterConsumer>
+                {
+                    ({onIncrementCount, onDecrementCount}) => {
+                        const handle = this.props.type === 'increment' ? onIncrementCount : onDecrementCount
+                       return <button onClick={handle}>{this.props.children}</button>
+                    }
+                }
+            </CounterConsumer>
+            
+        )
+    }
+}
+
+class App extends Component {
+    render () {
+        return (
+            <>
+                <CountBtn type="decrement" >-</CountBtn>
+                <Counter />
+                <CountBtn type="increment" >+</CountBtn>
+            </>
+        )
+    }
+}
+
+
 render (
-    <Counter />,
+    <CounterProvider>
+        <App />
+    </CounterProvider>,
     document.querySelector('#root')
 )
