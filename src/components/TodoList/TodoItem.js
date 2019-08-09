@@ -18,12 +18,18 @@ export default class TodoItem extends Component {
         } = this.props
         handleDelete(id)
     }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        return nextProps.isCompleted !== this.props.isCompleted
+    }
+
     render() {
+        console.log('TodoItem render')
         const {
             isCompleted,
             title
         } = this.props
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <li>
                <input type="checkbox" 
