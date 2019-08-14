@@ -1,16 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-// Provider 是 react-redux提供的一个组件
-import { Provider } from 'react-redux'
-
 import App from './App'
-import store from './store'
-window.store = store
+
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 render (
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <Router>
+        <Route component={App}/>
+    </Router>,
     document.querySelector('#root')
 )
