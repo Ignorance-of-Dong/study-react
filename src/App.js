@@ -11,6 +11,9 @@ import {
 } from './views'
 
 export default class App extends Component {
+    state = {
+        isLogin: true
+    }
     render() {
         return (
             <div>
@@ -24,7 +27,11 @@ export default class App extends Component {
                     <Route component={Artical} path="/artical" exact />
                     <Route component={ArticalDetail} path="/artical/:id" />
                     <Route component={NotFound} path="/404" />
-                    <Route component={Users} path="/users" />
+                    <Route render={()=> {
+                        return (
+                            this.state.isLogin ? <Users /> : <div>请登录</div>
+                        )
+                    }} path="/users" />
                     <Redirect to="/home" from="/" exact />
                     <Redirect to="/404" />
                 </Switch>
